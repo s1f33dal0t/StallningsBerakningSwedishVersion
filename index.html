@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montageplan</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="scriptsNoTranslate.js"></script>
+</head>
+<body>
+    <div id="content1">
+    <header>
+        <img src="KAEFER.png" alt="KAEFER Logo" crossorigin="anonymous">
+        <h1>Montageplan</h1>
+    </header>
+
+    <section>
+        <h2>Projektinformation</h2>
+        <table>
+            <tr>
+                <td>Projektnamn</td>
+                <td><input type="text" placeholder="Ange projektnamn..."></td>
+            </tr>
+            <tr>
+                <td>Beställare</td>
+                <td><input type="text" placeholder="Ange beställare..."></td>
+            </tr>
+            <tr>
+                <td>Kontakt</td>
+                <td><input type="text" placeholder="Ange kontaktperson..."></td>
+            </tr>
+            <tr>
+                <td>Adress</td>
+                <td><input type="text" placeholder="Ange adress..."></td>
+            </tr>
+            <tr>
+                <td>Ort</td>
+                <td><input type="text" placeholder="Ange ort..."></td>
+            </tr>
+        </table>
+    </section>
+    
+    <section>
+        <h2>Fyll i uppgifter för montageplanen</h2>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Beskrivning</th>
+                <th>Indata</th>
+            </tr>
+            <tr>
+                <td>Syfte</td>
+                <td>Beskriv syftet med montageplanen.</td>
+                <td><textarea placeholder="Ange syftet med montaget..."></textarea></td>
+            </tr>
+            <tr>
+                <td>Arbetsmetod</td>
+                <td>Beskriv arbetsmetoden som ska användas.</td>
+                <td><textarea placeholder="Ange arbetsmetod..."></textarea></td>
+            </tr>
+            <tr>
+                <td>Tidsplan</td>
+                <td>Beskriv tidsplanen för projektet.</td>
+                <td><input type="text" placeholder="Ange tidsplan..."></td>
+            </tr>
+            <tr>
+                <td>Personal</td>
+                <td>Ange roller och antal personer som deltar i arbetet.</td>
+                <td><input type="text" placeholder="Ange personal..."></td>
+            </tr>
+            <tr>
+                <td>Material</td>
+                <td>Lista material och resurser som krävs.</td>
+                <td><textarea placeholder="Ange material som behövs..."></textarea></td>
+            </tr>
+            <tr>
+                <td>Transportplan</td>
+                <td>Plan för transport och logistik.</td>
+                <td><textarea placeholder="Ange transportplan..."></textarea></td>
+            </tr>
+            <tr>
+                <td>Kommunikation</td>
+                <td>Plan för kommunikation mellan teammedlemmar.</td>
+                <td><textarea placeholder="Ange kommunikationsplan..."></textarea></td>
+            </tr>
+            <tr>
+                <td>Säkerhet och skydd</td>
+                <td>Beskriv säkerhetsåtgärder och skyddsutrustning.</td>
+                <td><textarea placeholder="Ange säkerhetsåtgärder..."></textarea></td>
+            </tr>
+            <tr>
+                <td>Arbete som ska utföras på ställning</td>
+                <td>Specificera arbetet som ska utföras på ställningen.</td>
+                <td><textarea placeholder="Beskriv arbetet..."></textarea></td>
+            </tr>
+            <tr>
+                <td>Montageanvisning</td>
+                <td>Välj om en särskild eller standard Layher-anvisning ska användas.</td>
+                <td>
+                    <select>
+                        <option value="">Välj...</option>
+                        <option value="särskild">Särskild</option>
+                        <option value="layher">Layher</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Typfall</td>
+                <td>Specificera om det är ett typfall.</td>
+                <td>
+                    <select>
+                        <option value="">Välj...</option>
+                        <option value="ja">Ja</option>
+                        <option value="nej">Nej</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Skall väderskydd monteras</td>
+                <td>Specificera om väderskydd ska monteras.</td>
+                <td>
+                    <select id="weather-protection" onchange="toggleWeatherMaterial()">
+                        <option value="">Välj...</option>
+                        <option value="ja">Ja</option>
+                        <option value="nej">Nej</option>
+                    </select>
+                </td>
+            </tr>
+            <tr id="weather-material-row" style="display: none;">
+                <td>Vilket väderskyddsmaterial</td>
+                <td>Ange vilket material som ska användas för väderskyddet.</td>
+                <td><textarea placeholder="Ange väderskyddsmaterial..."></textarea></td>
+            </tr>
+            <tr>
+                <td>Dimensionering</td>
+                <td>Välj typ av dimensionering som ska användas.</td>
+                <td>
+                    <select>
+                        <option value="">Välj...</option>
+                        <option value="förenklad">Förenklad beräkning</option>
+                        <option value="typfall">Typfall</option>
+                        <option value="särskild">Särskild dimensionering</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </section>
+    </div>
+    <div id="content2">
+    <header>
+        <img src="KAEFER.png" alt="KAEFER Logo" crossorigin="anonymous">
+        <h1>Riskanalys</h1>
+    </header>
+
+    <section>
+        <h2>Riskbedömning</h2>
+        <table>
+            <tr>
+                <th>Riskkälla</th>
+                <th>Risknivå</th>
+                <th>Ansvarig</th>
+                <th>Åtgärd</th>
+            </tr>
+            <tr>
+                <td>Skärande/stickande/sågande föremål</td>
+                <td class="normal">Normal</td>
+                <td>Ställningsbyggare</td>
+                <td>Använd skyddshandskar</td>
+            </tr>
+            <tr>
+                <td>Klämmande föremål, verktyg eller maskiner</td>
+                <td class="normal">Normal</td>
+                <td>Ställningsbyggare</td>
+                <td>Kontrollera utrustningens skick</td>
+            </tr>
+            <tr>
+                <td>Fallande/flygande föremål</td>
+                <td class="high">Hög</td>
+                <td>Ställningsbyggare</td>
+                <td>Använd "säkra verktyg", spärra av arbetsplatsen</td>
+            </tr>
+            <tr>
+                <td>Fall på samma nivå (snubbel, halka)</td>
+                <td class="normal">Normal</td>
+                <td>Ställningsbyggare</td>
+                <td>Hålla ordning, inga onödiga saker framme</td>
+            </tr>
+            <tr>
+                <td>Fall till lägre nivå</td>
+                <td class="high">Hög</td>
+                <td>Ställningsbyggare</td>
+                <td>Använd fallskyddsutrustning och arbeta lugnt</td>
+            </tr>
+            <tr>
+                <td>Buller</td>
+                <td class="low">Låg</td>
+                <td>Ställningsbyggare</td>
+                <td>Använd hörselskydd</td>
+            </tr>
+            <tr>
+                <td>Vibrationer (underlag, verktyg, fordon)</td>
+                <td class="normal">Normal</td>
+                <td>Ställningsbyggare</td>
+                <td>Kontrollera vibrationsnivå och använd rätt utrustning</td>
+            </tr>
+            <tr>
+                <td>Damm, småpartiklar</td>
+                <td class="normal">Normal</td>
+                <td>Ställningsbyggare</td>
+                <td>Använd andningsskydd</td>
+            </tr>
+            <tr>
+                <td>Elektricitet (skadad utrustning, sladdar, överslag)</td>
+                <td class="high">Hög</td>
+                <td>Ställningsbyggare</td>
+                <td>Kontrollera elinstallationer och använd jordfelsbrytare</td>
+            </tr>
+            <tr>
+                <td>Arbete med hängande last/rörlig last</td>
+                <td class="high">Hög</td>
+                <td>Ställningsbyggare</td>
+                <td>Använd rätt lyftutrustning och följ säkerhetsrutiner</td>
+            </tr>
+            <tr>
+                <td>Påkörning pga. omgivande trafik</td>
+                <td class="normal">Normal</td>
+                <td>Platschef</td>
+                <td>Använd avspärrningar och varningsskyltar</td>
+            </tr>
+            <tr>
+                <td>Brand/explosion</td>
+                <td class="high">Hög</td>
+                <td>Platschef</td>
+                <td>Ha tillgång till brandsläckare och följ brandrutiner</td>
+            </tr>
+            <tr>
+                <td>Regn, snö, hagel</td>
+                <td class="low">Låg</td>
+                <td>Platschef</td>
+                <td>Anpassa arbete och utrustning efter väderförhållanden</td>
+            </tr>
+            <tr>
+                <td>Kraftig blåst</td>
+                <td class="high">Hög</td>
+                <td>Platschef/Ställningsbyggare</td>
+                <td>Avbryt arbetet, kontrollera ställningens stabilitet</td>
+            </tr>
+            <tr>
+                <td>Sättningar i marken, rasrisk, sprickbildning</td>
+                <td class="high">Hög</td>
+                <td>Platschef</td>
+                <td>Övervaka markförhållanden och konsultera geotekniker</td>
+            </tr>
+            <tr>
+                <td><input type="text" placeholder="Ange egen risk..."></td>
+                <td><input type="text" placeholder="Ange risknivå..."></td>
+                <td><input type="text" placeholder="Ange ansvarig..."></td>
+                <td><input type="text" placeholder="Ange åtgärd..."></td>
+            </tr>
+            <tr>
+                <td><input type="text" placeholder="Ange egen risk..."></td>
+                <td><input type="text" placeholder="Ange risknivå..."></td>
+                <td><input type="text" placeholder="Ange ansvarig..."></td>
+                <td><input type="text" placeholder="Ange åtgärd..."></td>
+            </tr>
+            <tr>
+                <td><input type="text" placeholder="Ange egen risk..."></td>
+                <td><input type="text" placeholder="Ange risknivå..."></td>
+                <td><input type="text" placeholder="Ange ansvarig..."></td>
+                <td><input type="text" placeholder="Ange åtgärd..."></td>
+            </tr>
+        </table>
+    </section>
+    </div>
+    <div id="content3">
+    <header>
+        <img src="KAEFER.png" alt="KAEFER Logo" crossorigin="anonymous">
+        <h1>Dimensionering Ställning</h1>
+    </header>
+
+    <section>
+        <h2>Indata</h2>
+        <table>
+            <tr>
+                <td>Höjd (m)</td>
+                <td><input type="text" id="height" placeholder="Ange höjd i meter"></td>
+                <td class="error" id="height-error"></td>
+            </tr>
+            <tr>
+                <td>Bredd (m)</td>
+                <td>
+                    <select id="width">
+                        <option value="0.73">0.73 m</option>
+                        <option value="1.09">1.09 m</option>
+                        <option value="1.40">1.40 m</option>
+                        <option value="1.57">1.57 m</option>
+                        <option value="2.07">2.07 m</option>
+                        <option value="2.57">2.57 m</option>
+                        <option value="3.07">3.07 m</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Facklängd (m)</td>
+                <td>
+                    <select id="length">
+                        <option value="0.73">0.73 m</option>
+                        <option value="1.09">1.09 m</option>
+                        <option value="1.40">1.40 m</option>
+                        <option value="1.57">1.57 m</option>
+                        <option value="2.07">2.07 m</option>
+                        <option value="2.57">2.57 m</option>
+                        <option value="3.07">3.07 m</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Antal spiror</td>
+                <td><input type="text" id="num-spiror" placeholder="Ange antal spiror"></td>
+            </tr>
+            <tr>
+                <td>Nyttolast (Lastklass)</td>
+                <td>
+                    <select id="load-class">
+                        <option value="0.75">Klass 1 - 0.75 kN/m²</option>
+                        <option value="1.50">Klass 2 - 1.50 kN/m²</option>
+                        <option value="2.00">Klass 3 - 2.00 kN/m²</option>
+                        <option value="3.00">Klass 4 - 3.00 kN/m²</option>
+                        <option value="4.50">Klass 5 - 4.50 kN/m²</option>
+                        <option value="6.00">Klass 6 - 6.00 kN/m²</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Bredd för underpallning (m)</td>
+                <td><input type="text" id="underpallning-bredd" placeholder="Ange bredd"></td>
+            </tr>
+            <tr>
+                <td>Längd för underpallning (m)</td>
+                <td><input type="text" id="underpallning-längd" placeholder="Ange längd"></td>
+            </tr>
+            <tr>
+                <td>Konsoll (m)</td>
+                <td>
+                    <select id="console-width">
+                        <option value="0">Ingen konsoll</option>
+                        <option value="0.19">0.19 m</option>
+                        <option value="0.39">0.39 m</option>
+                        <option value="0.59">0.59 m</option>
+                        <option value="0.70">0.70 m</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Markbärighet (kN/m²)</td>
+                <td>
+                    <select id="soil-bearing">
+                        <option value="500">Betong/Berg - Obegränsad kN/m²</option>
+                        <option value="500">Grus och sten - 500 kN/m²</option>
+                        <option value="500">Asfalt väg - 500 kN/m²</option>
+                        <option value="350">Grov sand packad - 350 kN/m²</option>
+                        <option value="300">Asfalt på trottoar/Parkering - 300 kN/m²</option>
+                        <option value="250">Fin sand packad - 250 kN/m²</option>
+                        <option value="125">Lös sand - 125 kN/m²</option>
+                        <option value="80">Lera - 80 kN/m²</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Förankringsavstånd (vertikalt) (m)</td>
+                <td><input type="text" id="anchor-vertical" value="2" readonly></td>
+            </tr>
+        </table>
+    </section>
+
+    <button onclick="calculateLoads()">Beräkna laster</button>
+
+    <section>
+        <h2>Resultat</h2>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Värde</th>
+            </tr>
+            <tr>
+                <td>Egenvikt</td>
+                <td id="self-weight">-</td>
+            </tr>
+            <tr>
+                <td>Total kraft (Nyttolast inkl. konsoll)</td>
+                <td id="total-force">-</td>
+            </tr>
+            <tr>
+                <td>Spirlast (inner)</td>
+                <td id="spir-load-inner">-</td>
+            </tr>
+            <tr>
+                <td>Spirlast (ytter)</td>
+                <td id="spir-load-outer">-</td>
+            </tr>
+            <tr>
+                <td>Totalt antal förankringar</td>
+                <td id="total-anchors">-</td>
+            </tr>
+            <tr>
+                <td>Markbärighet</td>
+                <td id="soil-bearing-result">-</td>
+            </tr>
+            <tr>
+                <td>Underpallning belastning (kN/m²)</td>
+                <td id="underpallning-load">-</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Säkerhetsfaktorer</h2>
+        <ul>
+            <li>Nyttolast: 1.5 (enligt SS-EN 12811)</li>
+        </ul>
+    </section>
+
+    </div>
+    <div id="content4">
+
+    <h1>Vindlastberäkning</h1>
+
+    <section>
+        <h2>Indata</h2>
+        <table>
+            <tr>
+                <td>Referensvindhastighet (m/s)</td>
+                <td>
+                    <select id="ref-wind-speed-dropdown">
+                        <option value="21">21 m/s (Zon 1)</option>
+                        <option value="22">22 m/s (Zon 2)</option>
+                        <option value="23">23 m/s (Zon 3)</option>
+                        <option value="24">24 m/s (Zon 4)</option>
+                        <option value="25">25 m/s (Zon 5)</option>
+                        <option value="26">26 m/s (Zon 6)</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Terrängkategori</td>
+                <td>
+                    <select id="terrain-category">
+                        <option value="1.0">Kategori 1 (Öppen terräng)</option>
+                        <option value="0.9">Kategori 2 (Halvöppen terräng)</option>
+                        <option value="0.7">Kategori 3 (Stadsmiljö)</option>
+                        <option value="0.5">Kategori 4 (Tät skog)</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Formfaktor för täckning (C<sub>f</sub>)</td>
+                <td>
+                    <select id="form-factor">
+                        <option value="1.0">Ointäckt</option>
+                        <option value="1.3">Täckt (Nät)</option>
+                        <option value="1.2">Täckt (Duk)</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Lägesfaktor (C<sub>s</sub>)</td>
+                <td><input type="text" id="location-factor" value="1.0" placeholder="Ange lägesfaktor"></td>
+            </tr>
+            <tr>
+                <td>Reduktionsfaktor (R)</td>
+                <td><input type="text" id="reduction-factor" value="0.7" placeholder="Ange reduktionsfaktor"></td>
+            </tr>
+            <tr>
+                <td>Höjd mellan förankringar (m)</td>
+                <td><input type="text" id="anchor-height" value="2" readonly></td>
+            </tr>
+            <tr>
+                <td>Facklängd (m)</td>
+                <td>
+                    <select id="bay-length">
+                        <option value="0.73">0.73 m</option>
+                        <option value="1.09">1.09 m</option>
+                        <option value="1.40">1.40 m</option>
+                        <option value="1.57">1.57 m</option>
+                        <option value="2.07">2.07 m</option>
+                        <option value="2.57" selected>2.57 m</option>
+                        <option value="3.07">3.07 m</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <button onclick="fetchDataFromScaffold()">Hämta värden från ställningsdimensionering</button>
+    </section>
+
+    <button onclick="calculateWindLoads()">Beräkna Vindlaster</button>
+
+    <section>
+        <h2>Resultat</h2>
+        <div class="result" id="result">
+            <p>Vindtryck (q): <span id="wind-pressure">-</span> kN/m²</p>
+            <p>Projekterad area (A): <span id="projected-area">-</span> m²</p>
+            <p>Vindlast per förankring (F<sub>a</sub>): <span id="wind-load-anchor">-</span> kN</p>
+            <p>Rekommenderad provdragningslast: <span id="test-force">-</span> kN</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Säkerhetsfaktorer</h2>
+        <ul>
+            <li><strong>Vindtryck:</strong> Säkerhetsfaktor = 1.5 (enligt SS-EN 12810-1)</li>
+            <li><strong>Förankringslast:</strong> Säkerhetsfaktor = 2.0 (enligt SS-EN 12811-1)</li>
+        </ul>
+    </section>
+</div>
+
+</div>
+
+    <hr style="border-top: 3px solid gray; margin:50px;" />
+<!--
+    <div class="trans-button-cont">
+        <label for="language">Välj språk:</label>
+        <select id="language" onchange="translatePage()">
+            <option value="en">Engelska</option>
+            <option value="de">Tyska</option>
+            <option value="fr">Franska</option>
+            <option value="es">Spanska</option>
+            <option value="it">Italienska</option>
+            <option value="pl">Polska</option>
+            <option value="sk">Slovakiska</option>
+            <option value="ka">Georgiska</option>
+        </select>
+-->
+        <button class="trans-button" onClick="generateMultiPagePDF()">Generera Dokument</button>
+
+</body>
+</html>

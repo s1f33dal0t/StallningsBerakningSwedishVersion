@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+header {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+header img {
+    max-width: 100px;
+    margin-right: 20px;
+}
+
+#content {
+    width: 100%;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #cc0000;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: auto;  /* Set to auto for flexible layout */
+}
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    word-wrap: break-word;
+}
+table th {
+    background-color: #f4f4f4;
+}
+input[type="text"], textarea, select {
+    width: 80%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.map-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px 0;
+}
+.map-container img {
+    width: 100%;
+    height: auto;
+}
+.info {
+    margin: 10px 0;
+}
+.result {
+    background-color: #e9f7ef;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+
+.nav-buttons {
+    width: 150px;
+    height: 30px;
+    display: block;
+    font-weight: bold;
+}
+
+.nav-button-cont {
+    display: flex;
+    margin-top: 20px;
+    gap: 30px;
+    justify-content: center;
+}
+
+.trans-button-cont {
+    border: solid gray;
+    padding: 20px;
+    margin-top: 20px;
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.trans-button {
+    width: 250px;
+    height: 30px;
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.low {
+    background-color: #d4edda;
+}
+.normal {
+    background-color: #fff3cd;
+}
+.high {
+    background-color: #f8d7da;
+}
