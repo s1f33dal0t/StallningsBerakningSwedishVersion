@@ -46,8 +46,10 @@ input[type="text"], textarea, select {
     border-radius: 4px;
 }
 
-.new-page {
-  page-break-before: always;
+@media print {
+  .new-page {
+    page-break-before: always;
+  }
 }
 
 .map-container {
