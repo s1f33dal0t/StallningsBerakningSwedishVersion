@@ -1,3 +1,12 @@
+@media print {
+    .print-page {
+      page-break-after: always;
+    }
+    .no-print {
+        display: none;
+      }
+  }
+
 body {
     font-family: Arial, sans-serif;
     margin: 20px;

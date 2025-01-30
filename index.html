@@ -11,7 +11,7 @@
     <script src="scriptsNoTranslate.js"></script>
 </head>
 <body>
-    <div id="content1">
+    <div id="content1" class="print-page">
     <header>
         <img src="KAEFER.png" alt="KAEFER Logo" crossorigin="anonymous">
         <h1>Montageplan</h1>
@@ -149,7 +149,7 @@
         </table>
     </section>
     </div>
-    <div id="content2">
+    <div id="content2" class="print-page">
     <header>
         <img src="KAEFER.png" alt="KAEFER Logo" crossorigin="anonymous">
         <h1>Riskanalys</h1>
@@ -275,7 +275,7 @@
         </table>
     </section>
     </div>
-    <div id="content3">
+    <div id="content3" class="print-page">
     <header>
         <img src="KAEFER.png" alt="KAEFER Logo" crossorigin="anonymous">
         <h1>Dimensionering Ställning</h1>
@@ -517,23 +517,25 @@
 </div>
 
 </div>
-
-    <hr style="border-top: 3px solid gray; margin:50px;" />
+    <div class="no-print">
+        <hr style="border-top: 3px solid gray; margin:50px;" />
 <!--
-    <div class="trans-button-cont">
-        <label for="language">Välj språk:</label>
-        <select id="language" onchange="translatePage()">
-            <option value="en">Engelska</option>
-            <option value="de">Tyska</option>
-            <option value="fr">Franska</option>
-            <option value="es">Spanska</option>
-            <option value="it">Italienska</option>
-            <option value="pl">Polska</option>
-            <option value="sk">Slovakiska</option>
-            <option value="ka">Georgiska</option>
-        </select>
--->
-        <button class="trans-button" onClick="generateMultiPagePDF()">Generera Dokument</button>
-
+        <div class="trans-button-cont">
+            <label for="language">Välj språk:</label>
+            <select id="language" onchange="translatePage()">
+                <option value="en">Engelska</option>
+                <option value="de">Tyska</option>
+                <option value="fr">Franska</option>
+                <option value="es">Spanska</option>
+                <option value="it">Italienska</option>
+                <option value="pl">Polska</option>
+                <option value="sk">Slovakiska</option>
+                <option value="ka">Georgiska</option>
+            </select>
+-->         <center>
+            Spara som PDF
+            <button class="trans-button" onClick="window.print()">Spara PDF</button><br /><br />
+            </center>
+        </div>
 </body>
 </html>

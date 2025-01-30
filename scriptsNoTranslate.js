@@ -1,4 +1,4 @@
-async function generateMultiPagePDF(elementIds = ['content1', 'content2', 'content3', 'content4'], outputFileName = "document.pdf") {
+async function generateMultiPagePDF(elementIds = ['content1'], outputFileName = "document.pdf") {
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF('p', 'mm', 'a4');
     const pageHeight = pdf.internal.pageSize.getHeight();
